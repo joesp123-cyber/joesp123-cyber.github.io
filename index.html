@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Joe Wotherspoon — AI Systems</title>
+<meta name="description" content="AI systems portfolio. Fourteen builds across venture products, client delivery and independent research: document intelligence, autonomous agents, trading systems and full-stack delivery.">
+<meta property="og:title" content="Joe Wotherspoon — AI Systems">
+<meta property="og:description" content="Fourteen AI systems, built end to end. Several still running on their own schedules.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chivo:wght@700;900&family=Public+Sans:wght@400;500;600&family=Martian+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230E141B'/><circle cx='16' cy='16' r='6' fill='%23F2A93B'/></svg>">
+</head>
+<body>
+
+<a class="skip" href="#board">Skip to the systems</a>
+
+<header class="topbar">
+  <div class="topbar__in">
+    <span class="topbar__name">Joe&nbsp;Wotherspoon</span>
+    <nav class="topbar__nav" aria-label="Sections">
+      <a href="#board">Systems</a>
+      <a href="#stack">Stack</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" id="top">
+    <div class="hero__in">
+      <div class="hero__lead">
+        <p class="eyebrow" data-rise="0">AI Engineer &amp; Founder — 2024&nbsp;/&nbsp;2026</p>
+        <h1 class="hero__h1">
+          <span data-rise="1">I build AI systems</span>
+          <span data-rise="2">that keep running</span>
+          <span data-rise="3">without me.</span>
+        </h1>
+        <p class="hero__body" data-rise="4">
+          Fourteen builds across venture products, client delivery and independent research.
+          Document intelligence for private equity. Autonomous client communication for veterinary
+          clinics. Prospect discovery for a post-quantum cryptography consultancy. I take these
+          from ingestion pipeline to deployed interface on my own.
+        </p>
+        <ul class="hero__meta" data-rise="5">
+          <li><b id="count-total">14</b> systems built</li>
+          <li><b id="count-live">6</b> live now</li>
+          <li><b id="count-client">6</b> shipped to clients &amp; partners</li>
+        </ul>
+      </div>
+
+      <aside class="fleet" data-rise="4" aria-labelledby="fleet-h">
+        <h2 class="fleet__h" id="fleet-h">What runs without me</h2>
+        <ul class="fleet__list" id="fleet-list"></ul>
+        <p class="fleet__foot">Triggers as configured in production.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="board" id="board" aria-labelledby="board-h">
+    <div class="board__head">
+      <div class="board__headtext">
+        <h2 class="sec__h" id="board-h">The systems</h2>
+        <p class="sec__note">Every build, with its current state and what actually triggers it. Open a row for the agents inside it.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filter by state">
+        <button class="filter is-on" data-filter="all">All</button>
+        <button class="filter" data-filter="live">Live</button>
+        <button class="filter" data-filter="built">Built</button>
+        <button class="filter" data-filter="archived">Archived</button>
+      </div>
+    </div>
+    <noscript><p class="board__empty" style="color:var(--text-2)">This page renders its project list with a small amount of JavaScript. Enable it, or read the same content at github.com/joesp123-cyber.</p></noscript>
+    <div id="rows"></div>
+    <p class="board__empty" id="empty" hidden>Nothing in that state.</p>
+  </section>
+
+  <section class="stack" id="stack" aria-labelledby="stack-h">
+    <div class="stack__in">
+      <h2 class="sec__h" id="stack-h">Full stack</h2>
+      <dl class="stack__grid" id="stack-grid"></dl>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="contact-h">
+    <div class="contact__in">
+      <h2 class="sec__h" id="contact-h">Get in touch</h2>
+      <p class="contact__line">Open to AI engineering and consulting work, and to design partners for the products above.</p>
+      <ul class="contact__links">
+        <li><a href="https://github.com/joesp123-cyber">github.com/joesp123-cyber</a></li>
+        <li><a href="mailto:joespoons123@gmail.com">joespoons123@gmail.com</a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <span>Joe Wotherspoon</span>
+  <span class="foot__mono">Built by hand. No template.</span>
+</footer>
+
+<script src="projects.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
