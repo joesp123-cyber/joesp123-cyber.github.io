@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+/* Joe Wotherspoon — design system
+   Cool limestone / blue-black ink near-monochrome, verdigris used sparingly.
+   Verdigris is the patina copper takes when it has been standing outside for
+   years, which is the whole argument of the site. Calm motion only.
+   Manrope, one family. */
+
+@theme {
+  --color-bg: #efefeb; /* cool limestone — never stark white */
+  --color-bg-lift: #f8f8f6; /* one step up, for the ruled band */
+  --color-bg-tint: #e4e6e2; /* one step down, for the quiet band */
+  --color-ink: #14181a; /* blue-black */
+  --color-ink-soft: #515a5e; /* secondary text */
+  --color-ink-faint: #8a9296; /* labels / captions */
+  --color-accent: #3f7a6e; /* verdigris — sparingly only */
+  --color-line: rgba(20, 24, 26, 0.16); /* hairline rules — defined */
+  --color-line-strong: rgba(20, 24, 26, 0.3);
+
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  /* calm easing + generous durations */
+  --ease-calm: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* wide, breathing tracking for eyebrow labels */
+  --tracking-eyebrow: 0.22em;
+}
+
+/* Lenis smooth-scroll CSS. Without this the page scroll glitches
+   intermittently — nested scrollables fight Lenis and the stopped/height
+   states aren't handled. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-accent) 24%, transparent);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* horizontal page shell — consistent gutters + max measure */
+  .shell {
+    width: 100%;
+    max-width: 78rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-ink-faint);
+  }
+
+  /* tabular figures for the index numerals, so they never jitter as they grow */
+  .numeral {
+    font-variant-numeric: tabular-nums;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+  }
+}
+
+/* Entrance overlay — the wordmark fades up on limestone, then the whole layer
+   lifts away as a wipe. Gated on data-intro (set pre-paint in layout) so there
+   is no flash of content first, and none of it for returning visitors. */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  transform: translateY(0);
+  transition: transform 1.5s cubic-bezier(0.7, 0, 0.3, 1);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+[data-intro="play"] .intro-overlay {
+  display: flex;
+}
+.intro-overlay[data-exiting="true"] {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+.intro-logo {
+  opacity: 0;
+  transform: translateY(12px);
+  will-change: transform, opacity;
+}
+[data-intro="play"] .intro-logo {
+  animation: intro-logo-in 1.1s var(--ease-calm) 0.25s forwards;
+}
+@keyframes intro-logo-in {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro-overlay {
+    display: none !important;
+  }
+}
+
+/* Print — the scroll reveals start at opacity 0 and never fire on paper, so
+   without this everything below the fold prints blank. */
+@media print {
+  [data-reveal],
+  [data-reveal] * {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .intro-overlay {
+    display: none !important;
+  }
+  header[class*="fixed"] {
+    position: static !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
