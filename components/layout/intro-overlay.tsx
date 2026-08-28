@@ -40,10 +40,11 @@ export function IntroOverlay() {
   return (
     <div className="intro-overlay" data-exiting={exiting} aria-hidden="true">
       <div className="intro-logo text-center">
-        <p className="text-xl font-light tracking-[0.18em] uppercase md:text-2xl">
+        {/* same weight and tracking as the nav wordmark this hands over to */}
+        <p className="text-base font-medium tracking-[0.2em] uppercase md:text-lg">
           {SITE.name}
         </p>
-        <div className="mx-auto mt-5 h-px w-10 bg-accent" />
+        <div className="rule mx-auto mt-5" />
       </div>
     </div>
   );

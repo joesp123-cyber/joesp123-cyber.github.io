@@ -70,7 +70,7 @@ export function Nav() {
               <span
                 key={i}
                 className={[
-                  "absolute top-1/2 left-1/2 h-px w-6 -translate-x-1/2 transition-all duration-500 ease-[var(--ease-calm)] group-hover:bg-accent",
+                  "absolute top-1/2 left-1/2 h-px w-6 -translate-x-1/2 transition-all duration-300 ease-[var(--ease-calm)] group-hover:bg-accent",
                   scrolled || open ? "bg-ink" : "bg-bg",
                   i === 0 && (open ? "rotate-45" : "-translate-y-[0.3rem]"),
                   i === 1 && (open ? "opacity-0" : "opacity-100"),
@@ -99,7 +99,7 @@ export function Nav() {
                     onClick={() => setOpen(false)}
                     style={{ transitionDelay: open ? `${80 + i * 40}ms` : "0ms" }}
                     className={[
-                      "block px-5 py-2.5 text-sm text-ink-soft transition-all duration-500 hover:text-ink",
+                      "block px-5 py-2.5 text-sm text-ink-soft transition-all duration-200 ease-[var(--ease-soft)] hover:text-ink",
                       open ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0",
                     ].join(" ")}
                   >
@@ -110,7 +110,7 @@ export function Nav() {
               <li className="mt-2 border-t border-line pt-2">
                 <a
                   href={SITE.github}
-                  className="block px-5 py-2.5 text-sm text-ink-soft transition-colors hover:text-ink"
+                  className="block px-5 py-2.5 text-sm text-ink-soft transition-colors duration-200 hover:text-ink"
                 >
                   GitHub
                 </a>

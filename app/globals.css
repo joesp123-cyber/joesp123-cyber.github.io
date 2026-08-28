@@ -8,12 +8,13 @@
 
 @theme {
   --color-bg: #efefeb; /* cool limestone — never stark white */
-  --color-bg-lift: #f8f8f6; /* one step up, for the ruled band */
+  --color-bg-lift: #f5f5f2; /* one step up, for the ruled band */
   --color-bg-tint: #e4e6e2; /* one step down, for the quiet band */
   --color-ink: #14181a; /* blue-black */
   --color-ink-soft: #515a5e; /* secondary text */
-  --color-ink-faint: #8a9296; /* labels / captions */
-  --color-accent: #3f7a6e; /* verdigris — sparingly only */
+  --color-ink-faint: #656d71; /* labels / captions — 4.6:1 on limestone, 4.3:1 on the tint */
+  --color-accent: #356659; /* verdigris — sparingly only. 5.7:1, so it survives
+                               being used as a fill behind limestone text on the CTA */
   --color-line: rgba(20, 24, 26, 0.16); /* hairline rules — defined */
   --color-line-strong: rgba(20, 24, 26, 0.3);
 
@@ -106,12 +107,30 @@ html.lenis body {
     color: var(--color-ink-faint);
   }
 
+  /* the one recurring mark: a short verdigris rule between a section's opening
+     statement and its content. 2px, never 1 — a hairline blends away at DPR 1. */
+  .rule {
+    height: 2px;
+    width: 5rem;
+    background: var(--color-accent);
+  }
+
   /* tabular figures for the index numerals, so they never jitter as they grow */
   .numeral {
     font-variant-numeric: tabular-nums;
     font-weight: 300;
     letter-spacing: -0.03em;
   }
+}
+
+/* the scroll cue, on the site's own easing rather than Tailwind's stock pulse */
+@keyframes cue {
+  0%, 100% { opacity: 0.25; transform: scaleY(0.6); }
+  50%      { opacity: 0.7;  transform: scaleY(1); }
+}
+.scroll-cue {
+  transform-origin: top;
+  animation: cue 2.6s var(--ease-calm) infinite;
 }
 
 /* Entrance overlay — the wordmark fades up on limestone, then the whole layer

@@ -30,6 +30,9 @@ export const INTRO = {
 export const STATEMENT =
   "Every figure a system of mine produces carries its source, or it is labelled an estimate. That rule is enforced by a validator that fails the run, never by asking the model nicely.";
 
+export const INTERSTITIAL =
+  "The ones below were built to answer a question rather than a brief. Several of them are the reason the ones above work the way they do.";
+
 export const PRINCIPLES = [
   {
     title: "Build for the day after handover",
