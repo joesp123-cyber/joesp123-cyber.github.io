@@ -16,6 +16,17 @@ import {
 } from "@/lib/flappy";
 
 const KEY = "jw-entered";
+const REPLAY = "jw-replay";
+
+/** Clear the pass and put the door back up. Wired to the footer link. */
+export function replayEntryGame() {
+  try {
+    sessionStorage.removeItem(KEY);
+  } catch {
+    /* nothing stored to clear */
+  }
+  window.dispatchEvent(new Event(REPLAY));
+}
 
 /* Read straight off the CSS tokens so the game can never drift from the site. */
 const INK = "#14181a";
@@ -45,11 +56,16 @@ export function EntryGame() {
      not ask for features to be deleted. Nothing here moves until the first
      input (step() no-ops while the status is "ready"), the wipe is neutralised
      by the global reduced-motion rule, and the way past is a full-width button.
-     So the door is shown to everyone and the choice stays with the visitor. */
+     So the door is shown to everyone and the choice stays with the visitor.
+
+     Session-scoped, not permanent: once past, you are not asked again for the
+     rest of the visit, but coming back another day gets the door again. Storing
+     it for ever meant the game was seen exactly once per device and then never
+     found again, including by its owner. */
   useEffect(() => {
     let entered = false;
     try {
-      entered = localStorage.getItem(KEY) === "1";
+      entered = sessionStorage.getItem(KEY) === "1";
     } catch {
       /* storage blocked — play it, it is only a few seconds */
     }
@@ -58,12 +74,26 @@ export function EntryGame() {
 
   const enter = useCallback(() => {
     try {
-      localStorage.setItem(KEY, "1");
+      sessionStorage.setItem(KEY, "1");
     } catch {
       /* nothing to persist to; this visit still gets in */
     }
     setLeaving(true);
     window.setTimeout(() => setNeeded(false), 900);
+  }, []);
+
+  /* The footer link puts the door back up on demand. */
+  useEffect(() => {
+    const onReplay = () => {
+      game.current = initial();
+      last.current = 0;
+      setStatus("ready");
+      setPassed(0);
+      setLeaving(false);
+      setNeeded(true);
+    };
+    window.addEventListener(REPLAY, onReplay);
+    return () => window.removeEventListener(REPLAY, onReplay);
   }, []);
 
   /* Hold the page still underneath while the door is shut. */

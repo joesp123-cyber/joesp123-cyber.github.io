@@ -1,4 +1,5 @@
 import { SITE, CREDITS } from "@/content/site";
+import { ReplayGameLink } from "@/components/layout/replay-game";
 
 export function Footer() {
   return (
@@ -17,6 +18,9 @@ export function Footer() {
             >
               GitHub
             </a>
+          </li>
+          <li>
+            <ReplayGameLink />
           </li>
           <li>
             <a
