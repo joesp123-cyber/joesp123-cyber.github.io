@@ -1,11 +1,6 @@
-"use client";
-
 import { SITE, CREDITS } from "@/content/site";
-import { useUnlocked } from "@/components/sections/github-gate";
 
 export function Footer() {
-  const unlocked = useUnlocked();
-
   return (
     <footer className="border-t border-line">
       <div className="shell flex flex-col gap-8 py-12 md:flex-row md:items-end md:justify-between">
@@ -17,7 +12,7 @@ export function Footer() {
         <ul className="flex flex-wrap gap-x-8 gap-y-2 text-sm">
           <li>
             <a
-              href={unlocked ? SITE.github : "#github"}
+              href={SITE.github}
               className="border-b border-line pb-0.5 text-ink-soft transition-colors hover:border-accent hover:text-ink"
             >
               GitHub

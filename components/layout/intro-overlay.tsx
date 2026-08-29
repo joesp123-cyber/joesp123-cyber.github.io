@@ -24,11 +24,11 @@ export function IntroOverlay() {
     }
     sessionStorage.setItem("jw-intro", "seen");
     // hold on the wordmark, wipe, then unmount so it can never trap a click
-    const lift = setTimeout(() => setExiting(true), 1650);
+    const lift = setTimeout(() => setExiting(true), 1250);
     const drop = setTimeout(() => {
       setGone(true);
       document.documentElement.removeAttribute("data-intro");
-    }, 3200);
+    }, 2800);
     return () => {
       clearTimeout(lift);
       clearTimeout(drop);

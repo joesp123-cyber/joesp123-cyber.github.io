@@ -43,3 +43,4 @@ next-env.d.ts
 # static export output — built by CI, never committed
 /out
 /out-qa
+/out-shot

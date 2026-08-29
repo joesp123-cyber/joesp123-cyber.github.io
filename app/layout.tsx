@@ -3,6 +3,7 @@ import { Manrope } from "next/font/google";
 import "./globals.css";
 import { LenisProvider } from "@/components/layout/lenis-provider";
 import { IntroOverlay } from "@/components/layout/intro-overlay";
+import { EntryGame } from "@/components/layout/entry-game";
 import { Nav } from "@/components/layout/nav";
 import { SITE } from "@/content/site";
 
@@ -51,6 +52,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <IntroOverlay />
+        <EntryGame />
         <LenisProvider>
           <Nav />
           <main id="top">{children}</main>

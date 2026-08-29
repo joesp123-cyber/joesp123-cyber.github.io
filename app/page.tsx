@@ -3,7 +3,6 @@ import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { Parallax } from "@/components/motion/parallax";
 import { WorkIndex } from "@/components/sections/work-index";
 import { Footer } from "@/components/layout/footer";
-import { GithubGate } from "@/components/sections/github-gate";
 import { GROUPS, STACK } from "@/content/projects";
 import {
   HERO,
@@ -215,13 +214,6 @@ export default function Home() {
               ))}
             </dl>
           </Reveal>
-        </div>
-      </section>
-
-      {/* ---- The repository, behind a small puzzle ---- */}
-      <section className="border-t border-line">
-        <div className="shell py-24 md:py-32">
-          <GithubGate />
         </div>
       </section>
 
