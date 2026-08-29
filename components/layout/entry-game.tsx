@@ -188,14 +188,15 @@ export function EntryGame() {
 
   if (needed !== true) return null;
 
+  // the numeral beside this already carries the score, so the line never repeats it
   const line =
     status === "dead"
-      ? `Down after ${passed} of ${GATES.length}. Space to go again.`
+      ? "Down. Space to go again."
       : status === "won"
         ? "Through. Come in."
         : status === "ready"
-          ? "Space to rise. Five gates and the door opens."
-          : `${passed} of ${GATES.length}`;
+          ? `Space to rise. ${GATES.length} gates and the door opens.`
+          : "";
 
   return (
     <div
@@ -222,21 +223,20 @@ export function EntryGame() {
           />
         </button>
 
-        <div className="mt-5 flex flex-wrap items-baseline justify-between gap-4">
-          <p aria-live="polite" className="text-ink-soft">
-            <span className="numeral mr-3 text-lg text-ink">
-              {passed}/{GATES.length}
-            </span>
-            {line}
-          </p>
-          <button
-            type="button"
-            onClick={enter}
-            className="text-sm text-ink-faint underline decoration-line underline-offset-4 transition-colors duration-200 ease-[var(--ease-soft)] hover:text-ink hover:decoration-accent"
-          >
-            Skip and go straight in
-          </button>
-        </div>
+        <p aria-live="polite" className="mt-5 text-ink-soft">
+          <span className="numeral mr-3 text-lg text-ink">
+            {passed}/{GATES.length}
+          </span>
+          {line}
+        </p>
+
+        <button
+          type="button"
+          onClick={enter}
+          className="mt-6 w-full bg-blue px-6 py-5 text-sm tracking-[0.14em] text-bg uppercase transition-colors duration-200 ease-[var(--ease-soft)] hover:bg-blue-deep"
+        >
+          Skip and go straight in
+        </button>
       </div>
     </div>
   );

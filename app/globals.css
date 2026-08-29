@@ -15,6 +15,12 @@
   --color-ink-faint: #656d71; /* labels / captions — 4.6:1 on limestone, 4.3:1 on the tint */
   --color-accent: #356659; /* verdigris — sparingly only. 5.7:1, so it survives
                                being used as a fill behind limestone text on the CTA */
+  /* The one blue on the site, and it exists for exactly one control: the way
+     past the entry game. Deep enough to belong beside the blue-black ink, and
+     7.5:1 behind limestone text so the label is not straining. */
+  --color-blue: #274a8a;
+  --color-blue-deep: #1d3a6e;
+
   --color-line: rgba(20, 24, 26, 0.16); /* hairline rules — defined */
   --color-line-strong: rgba(20, 24, 26, 0.3);
 
