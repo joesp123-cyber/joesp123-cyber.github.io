@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { NAV, SITE } from "@/content/site";
+import { useUnlocked } from "@/components/sections/github-gate";
 
 /**
  * One control at every size: a hairline hamburger that becomes a cross, with a
@@ -12,6 +13,7 @@ import { NAV, SITE } from "@/content/site";
 export function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const unlocked = useUnlocked();
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -109,10 +111,11 @@ export function Nav() {
               ))}
               <li className="mt-2 border-t border-line pt-2">
                 <a
-                  href={SITE.github}
+                  href={unlocked ? SITE.github : "#github"}
+                  onClick={() => setOpen(false)}
                   className="block px-5 py-2.5 text-sm text-ink-soft transition-colors duration-200 hover:text-ink"
                 >
-                  GitHub
+                  GitHub{unlocked ? "" : " ↓"}
                 </a>
               </li>
             </ul>

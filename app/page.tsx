@@ -3,7 +3,8 @@ import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { Parallax } from "@/components/motion/parallax";
 import { WorkIndex } from "@/components/sections/work-index";
 import { Footer } from "@/components/layout/footer";
-import { GROUPS, STACK, TOTAL_COUNT, LIVE_COUNT } from "@/content/projects";
+import { GithubGate } from "@/components/sections/github-gate";
+import { GROUPS, STACK } from "@/content/projects";
 import {
   HERO,
   INTRO,
@@ -90,13 +91,13 @@ export default function Home() {
           <Reveal className="mb-14 max-w-2xl">
             <p className="eyebrow mb-4">Selected work</p>
             <h2 className="text-3xl md:text-5xl">
-              {TOTAL_COUNT} systems, and what each one was actually for
+              Every system, and what each one was actually for
             </h2>
             <div className="rule my-10" />
             <p className="max-w-xl text-lg text-ink-soft">
               Open a row for the problem it was built against, what it does, and
-              the decisions behind it. {LIVE_COUNT} of the {TOTAL_COUNT} are in
-              production today.
+              the decisions behind it. A filled mark means it is in production
+              today.
             </p>
           </Reveal>
 
@@ -214,6 +215,13 @@ export default function Home() {
               ))}
             </dl>
           </Reveal>
+        </div>
+      </section>
+
+      {/* ---- The repository, behind a small puzzle ---- */}
+      <section className="border-t border-line">
+        <div className="shell py-24 md:py-32">
+          <GithubGate />
         </div>
       </section>
 

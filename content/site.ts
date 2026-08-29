@@ -22,7 +22,7 @@ export const HERO = {
 
 export const INTRO = {
   positioning:
-    "Fourteen AI systems, built end to end. Four of them are running right now with nobody watching them.",
+    "Every system below was built end to end and put into service. Several of them are running right now with nobody watching them.",
   body: "I work alone, from the ingestion pipeline to the deployed interface. Document intelligence for private equity. Autonomous client communication for veterinary clinics. Prospect discovery for a post-quantum cryptography consultancy.",
   emphasis: "Some of it is mine. The rest belongs to people who needed it working, not demonstrated.",
 };
