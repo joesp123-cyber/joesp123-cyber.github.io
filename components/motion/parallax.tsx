@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 
 /**
@@ -17,7 +17,14 @@ export function Parallax({
   amount?: number;
   className?: string;
 }) {
-  const reduced = useReducedMotion();
+  // deferred by a render for the same reason as Reveal: reading the media query
+  // during render makes a reduced-motion client hydrate a different tree than
+  // the server produced
+  const prefersReduced = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const reduced = mounted && !!prefersReduced;
+
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,

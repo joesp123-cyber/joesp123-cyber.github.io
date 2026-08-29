@@ -1,8 +1,25 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 
 const CALM = [0.22, 1, 0.36, 1] as const;
+
+/**
+ * prefers-reduced-motion, but only after the first client render.
+ *
+ * Reading it during render swaps a motion element for a plain one, and the
+ * server has no media query to read — so a reduced-motion visitor hydrated a
+ * <div> onto markup React had emitted as a motion.div with inline initial
+ * styles, and every page load threw a hydration error. Deferring by one render
+ * keeps the first client pass identical to the server.
+ */
+function useReducedAfterMount() {
+  const reduced = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return mounted && !!reduced;
+}
 
 type Tag = "div" | "section" | "li" | "span" | "h2";
 const MOTION = {
@@ -31,7 +48,7 @@ export function Reveal({
   y?: number;
   className?: string;
 }) {
-  const reduced = useReducedMotion();
+  const reduced = useReducedAfterMount();
   const Comp = MOTION[as];
 
   if (reduced) {
@@ -70,7 +87,7 @@ export function Stagger({
   children: React.ReactNode;
   className?: string;
 }) {
-  const reduced = useReducedMotion();
+  const reduced = useReducedAfterMount();
   if (reduced) return <div className={className}>{children}</div>;
   return (
     <motion.div
@@ -92,7 +109,7 @@ export function StaggerItem({
   children: React.ReactNode;
   className?: string;
 }) {
-  const reduced = useReducedMotion();
+  const reduced = useReducedAfterMount();
   if (reduced) return <div className={className}>{children}</div>;
   return (
     <motion.div data-reveal className={className} variants={itemVariants}>

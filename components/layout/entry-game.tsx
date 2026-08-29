@@ -38,17 +38,22 @@ export function EntryGame() {
   const last = useRef(0);
 
   /* Decide after mount, so the server markup and the first client render match.
-     A reflex game is exactly what prefers-reduced-motion is for, so those
-     visitors go straight in. */
+
+     This used to skip the whole door under prefers-reduced-motion, which meant
+     anyone with Windows animation effects switched off never saw the game at
+     all. Reduced motion asks for nothing to move without being asked — it does
+     not ask for features to be deleted. Nothing here moves until the first
+     input (step() no-ops while the status is "ready"), the wipe is neutralised
+     by the global reduced-motion rule, and the way past is a full-width button.
+     So the door is shown to everyone and the choice stays with the visitor. */
   useEffect(() => {
-    let skip = false;
+    let entered = false;
     try {
-      skip = localStorage.getItem(KEY) === "1";
+      entered = localStorage.getItem(KEY) === "1";
     } catch {
       /* storage blocked — play it, it is only a few seconds */
     }
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) skip = true;
-    setNeeded(!skip);
+    setNeeded(!entered);
   }, []);
 
   const enter = useCallback(() => {
