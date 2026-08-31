@@ -18,12 +18,39 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: `${SITE.name} — ${SITE.role}`,
   description: SITE.description,
+  alternates: { canonical: "/" },
   openGraph: {
     title: `${SITE.name} — ${SITE.role}`,
     description: SITE.description,
     url: SITE.url,
     type: "website",
+    siteName: SITE.name,
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE.name} — ${SITE.role}`,
+    description: SITE.description,
+  },
+};
+
+/* Tells a search engine that this page is *about a named person*, which is the
+   only query it has any chance of winning: someone typing the name. Without it
+   the page is just prose that happens to mention one. */
+const PERSON = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: SITE.name,
+  url: SITE.url,
+  jobTitle: SITE.role,
+  description: SITE.description,
+  sameAs: [SITE.github],
+  knowsAbout: [
+    "Artificial intelligence engineering",
+    "Multi-agent systems",
+    "Document intelligence",
+    "Retrieval-augmented generation",
+    "Full-stack web development",
+  ],
 };
 
 /**
@@ -44,6 +71,10 @@ export default function RootLayout({
     <html lang="en-GB" className={manrope.variable}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: INTRO_GATE }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON) }}
+        />
         <noscript>
           {/* the scroll reveals start at opacity 0 and are never triggered
               without JS, so pin them visible */}
