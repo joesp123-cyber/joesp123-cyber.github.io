@@ -35,21 +35,37 @@ export const metadata: Metadata = {
 
 /* Tells a search engine that this page is *about a named person*, which is the
    only query it has any chance of winning: someone typing the name. Without it
-   the page is just prose that happens to mention one. */
-const PERSON = {
+   the page is just prose that happens to mention one. The WebSite node is what
+   lets Google show the site name above the result instead of the bare domain. */
+const STRUCTURED_DATA = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: SITE.name,
-  url: SITE.url,
-  jobTitle: SITE.role,
-  description: SITE.description,
-  sameAs: [SITE.github],
-  knowsAbout: [
-    "Artificial intelligence engineering",
-    "Multi-agent systems",
-    "Document intelligence",
-    "Retrieval-augmented generation",
-    "Full-stack web development",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE.url}/#website`,
+      url: SITE.url,
+      name: SITE.name,
+      description: SITE.description,
+      inLanguage: "en-GB",
+      publisher: { "@id": `${SITE.url}/#person` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${SITE.url}/#person`,
+      name: SITE.name,
+      url: SITE.url,
+      email: `mailto:${SITE.email}`,
+      jobTitle: SITE.role,
+      description: SITE.description,
+      sameAs: [SITE.github],
+      knowsAbout: [
+        "Artificial intelligence engineering",
+        "Multi-agent systems",
+        "Document intelligence",
+        "Retrieval-augmented generation",
+        "Full-stack web development",
+      ],
+    },
   ],
 };
 
@@ -73,7 +89,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: INTRO_GATE }} />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(STRUCTURED_DATA) }}
         />
         <noscript>
           {/* the scroll reveals start at opacity 0 and are never triggered
