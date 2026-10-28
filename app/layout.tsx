@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { LenisProvider } from "@/components/layout/lenis-provider";
 import { IntroOverlay } from "@/components/layout/intro-overlay";
@@ -98,6 +99,9 @@ export default function RootLayout({
         </noscript>
       </head>
       <body className="antialiased">
+        {/* Renders the preferred-source button in the footer. Loaded after the
+            page is interactive so it never delays the first paint. */}
+        <Script src="https://news.google.com/swg/js/v1/publisher.js" strategy="afterInteractive" />
         <IntroOverlay />
         <EntryGame />
         <LenisProvider>
