@@ -8,6 +8,10 @@ export function Footer() {
         <div>
           <p className="text-sm tracking-[0.2em] uppercase">{SITE.name}</p>
           <p className="mt-2 text-sm text-ink-soft">{SITE.role}</p>
+          {/* Google's "Add as a preferred source" button. Readers who click it
+              see this site more often in their own Top Stories, AI Overviews
+              and AI Mode. publisher.js (loaded in the layout) fills this in. */}
+          <div className="mt-5" google-add-preferred-source-btn="" />
         </div>
 
         <ul className="flex flex-wrap gap-x-8 gap-y-2 text-sm">
